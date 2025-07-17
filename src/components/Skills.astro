@@ -1,27 +1,184 @@
 ---
-const skills = [
-  { name: "Python", icon: "fab fa-python" }, { name: "SQL", icon: "fas fa-database" },
-  { name: "TensorFlow", icon: "fas fa-brain" }, { name: "PyTorch", icon: "fas fa-brain" },
-  { name: "Scikit-learn", icon: "fas fa-chart-line" }, { name: "Deep Learning", icon: "fas fa-robot" },
-  { name: "Computer Vision", icon: "fas fa-eye" }, { name: "NLP", icon: "fas fa-language" },
-  { name: "Apache Kafka", icon: "fas fa-project-diagram" }, { name: "Spark", icon: "fas fa-fire" },
-  { name: "AWS", icon: "fab fa-aws" }, { name: "GCP", icon: "fab fa-google" },
-  { name: "Docker", icon: "fab fa-docker" }, { name: "Git", icon: "fab fa-git-alt" },
-];
+// 1. ALL SKILLS RESTORED AND CATEGORIZED
+const skillData = {
+  technical: {
+    title: "Technical Skills",
+    icon: "fa-solid fa-code",
+    skills: [
+      { name: "Deep Learning", icon: "fas fa-robot", color: "#6E44FF" },
+      { name: "Machine Learning", icon: "fas fa-brain", color: "#F7931E" },
+      { name: "Computer Vision", icon: "fas fa-eye", color: "#5F9EA0" },
+      { name: "NLP", icon: "fas fa-language", color: "#34D399" },
+    ]
+  },
+  tools: {
+    title: "Tools & Technologies",
+    icon: "fa-solid fa-screwdriver-wrench",
+    skills: [
+      { name: "Python", icon: "fab fa-python", color: "#3776AB" },
+      { name: "SQL", icon: "fas fa-database", color: "#4479A1" },
+      { name: "TensorFlow", icon: "fab fa-dev", color: "#FF6F00" },
+      { name: "PyTorch", icon: "fab fa-dev", color: "#EE4C2C" },
+      { name: "Scikit-learn", icon: "fas fa-chart-line", color: "#F7931E" },
+      { name: "Apache Kafka", icon: "fas fa-project-diagram", color: "#231F20" },
+      { name: "Spark", icon: "fas fa-fire", color: "#E25A1C" },
+      { name: "AWS", icon: "fab fa-aws", color: "#FF9900" },
+      { name: "GCP", icon: "fab fa-google", color: "#4285F4" },
+      { name: "Docker", icon: "fab fa-docker", color: "#2496ED" },
+      { name: "Git", icon: "fab fa-git-alt", color: "#F05032" },
+    ]
+  },
+  professional: {
+    title: "Professional Skills",
+    icon: "fa-solid fa-comments",
+     skills: [
+      { name: "Problem Solving", icon: "fas fa-lightbulb", color: "#f59e0b" },
+      { name: "Collaboration", icon: "fas fa-users", color: "#10b981" },
+      { name: "Communication", icon: "fas fa-bullhorn", color: "#ef4444" },
+      { name: "Mentoring", icon: "fas fa-chalkboard-user", color: "#8b5cf6" },
+    ]
+  }
+};
 ---
+
 <section id="skills" class="section">
-    <div>
-        <h2 class="text-4xl font-bold uppercase text-center mb-12 text-slate-900 dark:text-white">
+    <div class="container mx-auto px-4 py-16">
+        <h2 class="text-4xl font-bold uppercase text-center mb-16 text-slate-900 dark:text-white">
             <span>My </span>
             <span class="text-blue-500">Skills</span>
         </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {skills.map(skill => (
-                <div class="bg-white dark:bg-slate-900 rounded-lg p-4 flex items-center space-x-4 border border-slate-200 dark:border-slate-800">
-                    <i class={`${skill.icon} text-blue-500 text-3xl w-8 text-center`}></i>
-                    <span class="text-lg font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>
-                </div>
-            ))}
+
+        <div class="mb-16">
+            <h3 class="flex items-center text-2xl font-bold text-slate-800 dark:text-slate-200 mb-8">
+                <i class=`${skillData.technical.icon} mr-3 text-blue-500`></i>
+                {skillData.technical.title}
+            </h3>
+            <div class="flex flex-wrap gap-4">
+                {skillData.technical.skills.map(skill => (
+                    <div class="skill-card-container">
+                        <div class="skill-card-flipper">
+                            <div class="card-face card-front"><i class={`${skill.icon} text-4xl text-slate-700 dark:text-slate-300`}></i></div>
+                            <div class="card-face card-back" style={`background-color: ${skill.color}`}><span class="font-bold text-white text-xs text-center">{skill.name}</span></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div class="mb-16">
+            <h3 class="flex items-center text-2xl font-bold text-slate-800 dark:text-slate-200 mb-8">
+                <i class=`${skillData.tools.icon} mr-3 text-emerald-500`></i>
+                {skillData.tools.title}
+            </h3>
+            <div class="flex flex-wrap gap-4">
+                 {skillData.tools.skills.map(skill => (
+                    <div class="skill-card-container">
+                        <div class="skill-card-flipper">
+                            <div class="card-face card-front"><i class={`${skill.icon} text-4xl text-slate-700 dark:text-slate-300`}></i></div>
+                            <div class="card-face card-back" style={`background-color: ${skill.color}`}><span class="font-bold text-white text-xs text-center">{skill.name}</span></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div>
+            <h3 class="flex items-center text-2xl font-bold text-slate-800 dark:text-slate-200 mb-8">
+                <i class=`${skillData.professional.icon} mr-3 text-pink-500`></i>
+                {skillData.professional.title}
+            </h3>
+            <div class="flex flex-wrap gap-4">
+                 {skillData.professional.skills.map(skill => (
+                    <div class="skill-card-container">
+                        <div class="skill-card-flipper">
+                            <div class="card-face card-front"><i class={`${skill.icon} text-4xl text-slate-700 dark:text-slate-300`}></i></div>
+                            <div class="card-face card-back" style={`background-color: ${skill.color}`}><span class="font-bold text-white text-xs text-center">{skill.name}</span></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     </div>
 </section>
+
+<style>
+    .skill-card-container {
+        perspective: 1000px;
+        /* 2. DIRECTLY CONTROLLING THE SIZE for a consistent small card */
+        @apply w-24 h-24; /* You can adjust this value (e.g., w-20 h-20) if you want them even smaller */
+    }
+
+    .skill-card-flipper {
+        @apply relative w-full h-full transition-transform duration-1000 ease-in-out;
+        transform-style: preserve-3d;
+    }
+
+    .card-face {
+        @apply absolute w-full h-full rounded-lg flex items-center justify-center p-2 shadow-lg; /* Using rounded-lg for a softer square */
+        backface-visibility: hidden;
+    }
+
+    .card-front {
+        @apply bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800;
+    }
+
+    .card-back {
+        @apply text-white;
+        transform: rotateY(180deg);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const skillContainers = gsap.utils.toArray('.skill-card-container') as HTMLElement[];
+        
+        if (skillContainers.length > 0) {
+            // Entrance Animation (from before)
+            gsap.set(skillContainers, { autoAlpha: 0, y: 50, scale: 0.8 });
+            ScrollTrigger.batch(skillContainers as ArrayLike<HTMLElement>, {
+                onEnter: batch => gsap.to(batch, {
+                    autoAlpha: 1,
+                    y: 0,
+                    scale: 1,
+                    stagger: 0.05,
+                    ease: "power3.out",
+                    duration: 0.8
+                }),
+                start: "top 90%",
+            });
+
+            // --- NEW: Continuous Random Flip Animation ---
+            const flippers = gsap.utils.toArray('.skill-card-flipper') as HTMLElement[];
+            flippers.forEach(flipper => {
+                // This timeline will control the animation for a single card
+                const timeline = gsap.timeline({
+                    repeat: -1, // This makes the animation loop forever
+                    delay: gsap.utils.random(0, 8), // Each card starts its loop at a random time
+                    repeatDelay: gsap.utils.random(8, 15), // Wait a random 8-15s before looping again
+                });
+
+                timeline
+                    // 1. Flip to the back
+                    .to(flipper, {
+                        rotationY: 180,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    })
+                    // 2. Wait for 3 seconds while showing the back
+                    .to(flipper, {
+                        duration: 3
+                    })
+                    // 3. Flip back to the front
+                    .to(flipper, {
+                        rotationY: 0,
+                        duration: 1,
+                        ease: "power2.inOut"
+                    });
+            });
+        }
+    });
+</script>

@@ -1,42 +1,152 @@
-<section id="home" class="section">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div class="relative flex justify-center lg:justify-start items-center h-[500px]">
-            <div class="ring ring-1 animate-spin-slow"></div>
-            <div class="ring ring-2 animate-spin-slow-reverse"></div>
-            
-            <div class="relative w-80 h-80 md:w-[400px] md:h-[400px] rounded-full bg-slate-200 dark:bg-gray-800 shadow-2xl p-2 z-10">
+---
+// Your details data remains the same.
+const details = [
+    {
+        icon: "🔭",
+        title: "I’m currently working on:",
+        content: "Enhancing my knowledge in MLOps, solving LeetCode problems in Python, and preparing for my exams."
+    },
+    {
+        icon: "👯",
+        title: "I’m looking to collaborate on:",
+        content: "Projects in Machine Learning, Data Science, Data Engineering, and solving challenging LeetCode problems—let’s discuss time and space complexity!"
+    },
+    {
+        icon: "🤝",
+        title: "I’m looking for help with:",
+        content: "Advanced concepts in MLOps, optimizing LeetCode solutions, and mastering algorithmic problem-solving techniques."
+    },
+    {
+        icon: "🌱",
+        title: "I’m currently learning:",
+        content: "Expanding my knowledge in technology and refining my problem-solving and coding skills."
+    },
+    {
+        icon: "💬",
+        title: "Ask me about:",
+        content: "Data Science, Machine Learning, Python Development, GCP, AWS, and deploying containerized applications using Docker."
+    },
+    {
+        icon: "⚡",
+        title: "Fun fact:",
+        content: "I sometimes refer to my GPU as my 'co-pilot' for late-night coding marathons."
+    }
+];
+---
+<section id="home" class="section overflow-x-hidden">
+    <div class="hidden lg:block lg:fixed lg:top-12 lg:left-12 lg:z-10">
+        <div class="hero-image-rotator relative w-[400px] h-[400px]" style="transform-style: preserve-3d; perspective: 1500px;">
+            <div class="image-content-wrapper">
                 <img src="/images/profile.jpg" alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
             </div>
         </div>
+    </div>
 
-        <div class="text-center lg:text-left">
-            <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
-                Hi, I'm <span class="text-blue-500">Farhan Shahriyar</span>
-            </h1>
-            <h2 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-200 font-semibold mb-8">
-                A Data Scientist & ML Engineer.
-            </h2>
-            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0">
-                MSc Data Science student passionate about building AI models, developing data engineering pipelines, and deploying cloud-based solutions.
-            </p>
+    <div class="container mx-auto px-4 flex items-start pt-32 lg:pt-0 min-h-screen">
+        <div class="w-full lg:ml-[500px]">
+            <div class="lg:hidden flex justify-center mb-12">
+                 <div class="relative w-64 h-64">
+                    <div class="image-content-wrapper">
+                         <img src="/images/profile.jpg" alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
+                    </div>
+                 </div>
+            </div>
+
+            <div class="text-center lg:text-left">
+                <h1 id="hero-headline" class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+                    Hi, I'm <span class="text-blue-500">Farhan Shahriyar</span>
+                </h1>
+                <h2 id="hero-subheading" class="text-2xl md:text-3xl text-slate-800 dark:text-slate-200 font-semibold mb-8">
+                    A Data Scientist & ML Engineer.
+                </h2>
+                <div id="details-ticker" class="max-w-xl mx-auto lg:mx-0 mt-10">
+                    {details.map((item) => (
+                        <div class="ticker-card">
+                            <div class="flex items-start">
+                                <span class="text-2xl pt-1 text-sky-200">{item.icon}</span>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg text-white">{item.title}</h4>
+                                    <p class="text-white/80 text-sm">{item.content}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
-    /* The custom @keyframes are no longer needed here */
-    .ring {
-        position: absolute;
-        border-radius: 50%;
-        border: 2px solid;
-        @apply border-slate-300 dark:border-gray-700 opacity-50;
+    /* The CSS for .ring, .ring-1, .ring-2 and the @keyframes have been deleted. */
+
+    .image-content-wrapper {
+        @apply relative w-full h-full rounded-full bg-slate-200 dark:bg-gray-800 shadow-2xl p-2;
     }
-    .ring-1 {
-        width: calc(100% - 40px);
-        height: calc(100% - 40px);
+    
+    #details-ticker { @apply relative; height: 120px; }
+    .ticker-card {
+        @apply absolute top-0 left-0 w-full p-5 rounded-xl shadow-lg;
+        background-image: linear-gradient(to bottom right, theme('colors.blue.600'), theme('colors.blue.800'));
+        opacity: 0;
     }
-    .ring-2 {
-        width: calc(100% + 40px);
-        height: calc(100% + 40px);
-    }
+    .char { display: inline-block; }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 1. TEXT ANIMATIONS (Unchanged) ---
+        const headline = document.getElementById('hero-headline');
+        if (headline) {
+            const text = headline.innerText;
+            headline.innerHTML = '';
+            text.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.style.transformOrigin = 'bottom';
+                span.innerHTML = char === ' ' ? '&nbsp;' : char;
+                headline.appendChild(span);
+            });
+            gsap.from(".char", {
+                delay: 0.5, duration: 1.5, stagger: 0.03, opacity: 0,
+                y: -50, rotationX: -90, ease: "elastic.out(1, 0.5)",
+            });
+        }
+        gsap.from("#hero-subheading", { delay: 1, duration: 1, opacity: 0, y: 30, ease: "power3.out"});
+
+        // --- 2. SCROLL-BASED 3D ROTATION ---
+        const imageRotator = document.querySelector('.hero-image-rotator');
+        if (imageRotator) {
+            gsap.to(imageRotator, {
+                scrollTrigger: {
+                    trigger: "#home",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1,
+                },
+                rotationY: -120,
+                rotationZ: 40,
+                ease: "power1.out"
+            });
+        }
+        
+        // --- 3. TEXT CAROUSEL ANIMATION ---
+        const tickerCards = gsap.utils.toArray<HTMLElement>('.ticker-card');
+        let currentIndex = 0;
+        if (tickerCards.length > 0) {
+            gsap.set(tickerCards[0], { autoAlpha: 1, y: 0 });
+            const cycleCards = () => {
+                const tl = gsap.timeline();
+                tl.to(tickerCards[currentIndex], { autoAlpha: 0, y: -15, duration: 0.6, ease: "power2.in" })
+                  .set(tickerCards[currentIndex], { y: 15 })
+                  .to(tickerCards[(currentIndex + 1) % tickerCards.length], { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3");
+                currentIndex = (currentIndex + 1) % tickerCards.length;
+            };
+            setInterval(cycleCards, 5000);
+        }
+    });
+</script>

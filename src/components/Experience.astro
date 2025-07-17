@@ -3,25 +3,43 @@ const experienceData = [
   {
     duration: "August 2025 - Present",
     title: "Working Student - Global IT",
-    company: "Nordex SE, Hamburg"
+    company: "Nordex SE, Hamburg",
+    // ADDED a details array to provide more information
+    details: [
+      "Developing and maintaining data processing pipelines using modern ETL tools.",
+      "Collaborating on cloud infrastructure management and deployment on AWS.",
+      "Automating system monitoring and alert tasks using Python and Bash scripts."
+    ]
   }
 ];
 ---
 <section id="experience" class="section">
-    <div>
-        <h2 class="text-4xl font-bold uppercase text-center mb-12 text-slate-900 dark:text-white">
+    <div class="container mx-auto px-4 py-16">
+        <h2 class="text-4xl font-bold uppercase text-center mb-16 text-slate-900 dark:text-white">
             <span>My </span>
             <span class="text-blue-500">Experience</span>
         </h2>
-        <div class="timeline-container relative">
-            {experienceData.map(item => (
-                <div class="timeline-item">
-                    <div class="timeline-icon">
-                        <i class="fas fa-briefcase"></i>
+        
+        <div class="timeline-container">
+            {experienceData.map((item, index) => (
+                <div class={`timeline-item group ${index % 2 !== 0 ? 'timeline-item-left' : ''}`}>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <p class="timeline-duration">{item.duration}</p>
+                        <h5 class="text-xl font-semibold uppercase text-slate-800 dark:text-slate-100">{item.title}</h5>
+                        <p class="text-slate-600 dark:text-slate-300 mb-4">{item.company}</p>
+
+                        {item.details && (
+                            <ul class="space-y-2 text-left border-t border-slate-200 dark:border-slate-800 pt-4">
+                                {item.details.map(detail => (
+                                    <li class="flex items-start">
+                                        <i class="fas fa-caret-right text-blue-500 mt-1 mr-3 flex-shrink-0"></i>
+                                        <span class="text-slate-600 dark:text-slate-400">{detail}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
-                    <p class="timeline-duration">{item.duration}</p>
-                    <h5 class="text-xl font-semibold uppercase text-slate-800 dark:text-slate-100">{item.title}</h5>
-                    <p class="text-slate-600 dark:text-slate-300">{item.company}</p>
                 </div>
             ))}
         </div>
@@ -29,22 +47,35 @@ const experienceData = [
 </section>
 
 <style>
-    .timeline-container {
-        @apply border-l-2 border-slate-300 dark:border-gray-700 max-w-3xl mx-auto;
-    }
-    .timeline-item {
-        @apply relative pl-16 pb-12;
-    }
-    .timeline-item:not(:last-child) {
-        @apply pb-12;
-    }
-    .timeline-icon {
-        @apply absolute -left-[26px] top-0 bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center;
-    }
-    .timeline-icon i {
-        @apply text-lg text-white;
-    }
-    .timeline-duration {
-        @apply px-3 py-1 bg-slate-200 dark:bg-gray-700 rounded-full inline-block text-xs uppercase font-semibold mb-2;
-    }
+    /* REMOVED max-width and mx-auto to make the container full-width */
+    .timeline-container { @apply relative w-full; }
+    .timeline-container::after { content: ''; @apply absolute top-0 left-1/2 w-1 h-full bg-slate-300 dark:bg-gray-700 -ml-[2px] rounded-full; }
+    .timeline-item { @apply relative mb-12 pl-[calc(50%+30px)] w-full; }
+    .timeline-item-left { @apply pl-0 pr-[calc(50%+30px)] text-right; }
+    .timeline-dot { @apply absolute top-1 left-1/2 w-6 h-6 bg-slate-200 dark:bg-gray-600 rounded-full -ml-3 border-4 border-white dark:border-slate-900 z-10 transition-colors duration-300 group-hover:bg-blue-500; }
+    .timeline-item-left .timeline-dot { @apply -mr-3; }
+    /* INCREASED padding from p-6 to p-8 to make cards bigger */
+    .timeline-content { @apply bg-white dark:bg-slate-900 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-800 transition-transform duration-300 group-hover:-translate-y-1; }
+     .timeline-item-left .timeline-content { @apply text-left; }
+    .timeline-content::before { content: ''; @apply absolute top-6 -left-2.5 w-5 h-5 bg-white dark:bg-slate-900 rotate-45 border-l border-b border-slate-200 dark:border-slate-800; }
+    .timeline-item-left .timeline-content::before { @apply left-auto -right-2.5 border-l-0 border-b-0 border-r border-t; }
+    .timeline-duration { @apply px-3 py-1 bg-slate-200 dark:bg-gray-700 rounded-full inline-block text-xs uppercase font-semibold mb-3; }
 </style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = gsap.utils.toArray('#experience .timeline-item');
+        items.forEach(item => {
+            const el = item as HTMLElement;
+            const isLeft = el.classList.contains('timeline-item-left');
+            gsap.set(el, { autoAlpha: 0, x: isLeft ? -100 : 100, y: 50 });
+            gsap.to(el, {
+                scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+                autoAlpha: 1, x: 0, y: 0, duration: 0.8, ease: "power3.out"
+            });
+        });
+    });
+</script>

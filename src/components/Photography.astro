@@ -1,19 +1,36 @@
 ---
+// photography.astro
+
 const photoCount = 58;
 const allPhotos = Array.from({ length: photoCount }, (_, i) => `/images/photo${i + 1}.jpg`);
+
+// We still need the first 20 for the marquee's HTML
+const marqueePhotos = allPhotos.slice(0, 20);
+// The 'gridPhotos' variable is no longer needed here.
 ---
 <section id="photography" class="section">
     <div>
         <h2 class="text-4xl font-bold uppercase text-center mb-4 text-slate-900 dark:text-white">
             My <span class="text-blue-500">Photography</span>
         </h2>
-        <p class="text-slate-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">Beyond the code, I enjoy capturing the world through my camera lens.</p>
+        <p class="text-slate-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+            Beyond the code, I enjoy capturing the world through my camera lens. Here's a glimpse of my collection.
+        </p>
 
-        <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="marquee-container">
+            <div class="marquee-track">
+                {[...marqueePhotos, ...marqueePhotos].map((photoSrc, index) => (
+                    <div class="marquee-item">
+                        <img src={photoSrc} alt={`Photograph ${index + 1}`} class="gallery-image" loading="lazy" />
+                    </div>
+                ))}
             </div>
+        </div>
 
-        <div id="show-more-container" class="text-center mt-12">
-            <button id="show-more-btn" class="bg-blue-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors">
+        <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8"></div>
+        <div id="controls-container" class="text-center mt-12">
+            <div id="finale-message" class="text-2xl font-bold text-slate-700 dark:text-slate-300 hidden mb-4">That's all of them! 🎉</div>
+            <button id="toggle-photos-btn" class="bg-blue-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors">
                 Show More
             </button>
         </div>
@@ -25,95 +42,17 @@ const allPhotos = Array.from({ length: photoCount }, (_, i) => `/images/photo${i
     <img id="lightbox-image" src="" alt="Full-screen view" class="max-w-[90%] max-h-[85%]">
 </div>
 
-<script define:vars={{ allPhotos }}>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
+<style>
+    .marquee-container { @apply w-full overflow-hidden relative cursor-pointer; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+    .marquee-track { @apply flex w-max; }
+    .marquee-item { @apply w-64 h-40 flex-shrink-0 p-2; }
+    .marquee-item img { @apply w-full h-full object-cover rounded-lg shadow-md; }
+    .grid-photo-item { @apply relative aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800 opacity-0; }
+    .grid-photo-item img { @apply absolute top-0 left-0 w-full h-full object-cover cursor-pointer; }
+</style>
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    // This ensures the script waits for the entire page to be ready
-    document.addEventListener('DOMContentLoaded', () => {
-        const photoGrid = document.getElementById('photo-grid');
-        const showMoreBtn = document.getElementById('show-more-btn');
-        const showMoreContainer = document.getElementById('show-more-container');
-        
-        if (!photoGrid || !showMoreBtn || !showMoreContainer) {
-            return;
-        }
-
-        let photosPerLoad = 15;
-        let currentlyDisplayed = 0;
-
-        function animateItem(item) {
-            const overlay = item.querySelector('.photo-overlay');
-            const image = item.querySelector('.gallery-image');
-            gsap.set(overlay, { yPercent: 0 });
-            gsap.set(image, { scale: 1.2 });
-
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: item,
-                    start: "top 90%",
-                    toggleActions: "play none none none",
-                }
-            }).to(overlay, {
-                yPercent: -101,
-                duration: 1.2,
-                ease: "power4.inOut"
-            }).to(image, {
-                scale: 1,
-                duration: 1.2,
-                ease: "power4.inOut"
-            }, "-=1.2");
-        }
-
-        function addPhotos() {
-            const photosToLoad = allPhotos.slice(currentlyDisplayed, currentlyDisplayed + photosPerLoad);
-            
-            photosToLoad.forEach(photoSrc => {
-                const item = document.createElement('div');
-                item.className = 'photo-item relative aspect-square rounded-lg overflow-hidden bg-slate-200 dark:bg-slate-800';
-                
-                const img = document.createElement('img');
-                img.src = photoSrc;
-                img.alt = "A photograph by Farhan Shahriyar";
-                img.loading = "lazy";
-                img.className = 'gallery-image absolute top-0 left-0 w-full h-full object-cover cursor-pointer';
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'photo-overlay absolute top-0 left-0 w-full h-full bg-blue-500';
-
-                item.appendChild(img);
-                item.appendChild(overlay);
-                photoGrid.appendChild(item);
-                animateItem(item);
-            });
-
-            currentlyDisplayed += photosToLoad.length;
-
-            if (currentlyDisplayed >= allPhotos.length) {
-                showMoreContainer.style.display = 'none';
-            }
-            ScrollTrigger.refresh();
-        }
-
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightbox-image');
-        const closeBtn = document.getElementById('close-lightbox');
-
-        photoGrid.addEventListener('click', (e) => {
-            if (e.target && e.target.classList.contains('gallery-image')) {
-                lightbox.classList.remove('hidden');
-                lightboxImage.setAttribute('src', e.target.src);
-            }
-        });
-        
-        if (closeBtn) closeBtn.addEventListener('click', () => lightbox.classList.add('hidden'));
-        if (lightbox) lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) lightbox.classList.add('hidden');
-        });
-
-        addPhotos(); // Load initial batch
-        showMoreBtn.addEventListener('click', addPhotos); // Add click listener
-    });
+<script define:vars={{ allPhotos }} is:inline>
+    window.allPhotos = allPhotos;
 </script>
+
+<script src="../scripts/photo-gallery.js"></script>
