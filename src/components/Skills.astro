@@ -1,0 +1,27 @@
+---
+const skills = [
+  { name: "Python", icon: "fab fa-python" }, { name: "SQL", icon: "fas fa-database" },
+  { name: "TensorFlow", icon: "fas fa-brain" }, { name: "PyTorch", icon: "fas fa-brain" },
+  { name: "Scikit-learn", icon: "fas fa-chart-line" }, { name: "Deep Learning", icon: "fas fa-robot" },
+  { name: "Computer Vision", icon: "fas fa-eye" }, { name: "NLP", icon: "fas fa-language" },
+  { name: "Apache Kafka", icon: "fas fa-project-diagram" }, { name: "Spark", icon: "fas fa-fire" },
+  { name: "AWS", icon: "fab fa-aws" }, { name: "GCP", icon: "fab fa-google" },
+  { name: "Docker", icon: "fab fa-docker" }, { name: "Git", icon: "fab fa-git-alt" },
+];
+---
+<section id="skills" class="section">
+    <div>
+        <h2 class="text-4xl font-bold uppercase text-center mb-12 text-slate-900 dark:text-white">
+            <span>My </span>
+            <span class="text-blue-500">Skills</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {skills.map(skill => (
+                <div class="bg-white dark:bg-slate-900 rounded-lg p-4 flex items-center space-x-4 border border-slate-200 dark:border-slate-800">
+                    <i class={`${skill.icon} text-blue-500 text-3xl w-8 text-center`}></i>
+                    <span class="text-lg font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

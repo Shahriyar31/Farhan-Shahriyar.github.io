@@ -1,0 +1,42 @@
+<section id="home" class="section">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="relative flex justify-center lg:justify-start items-center h-[500px]">
+            <div class="ring ring-1 animate-spin-slow"></div>
+            <div class="ring ring-2 animate-spin-slow-reverse"></div>
+            
+            <div class="relative w-80 h-80 md:w-[400px] md:h-[400px] rounded-full bg-slate-200 dark:bg-gray-800 shadow-2xl p-2 z-10">
+                <img src="/images/profile.jpg" alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
+            </div>
+        </div>
+
+        <div class="text-center lg:text-left">
+            <h1 class="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+                Hi, I'm <span class="text-blue-500">Farhan Shahriyar</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl text-slate-800 dark:text-slate-200 font-semibold mb-8">
+                A Data Scientist & ML Engineer.
+            </h2>
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl mx-auto lg:mx-0">
+                MSc Data Science student passionate about building AI models, developing data engineering pipelines, and deploying cloud-based solutions.
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* The custom @keyframes are no longer needed here */
+    .ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 2px solid;
+        @apply border-slate-300 dark:border-gray-700 opacity-50;
+    }
+    .ring-1 {
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+    }
+    .ring-2 {
+        width: calc(100% + 40px);
+        height: calc(100% + 40px);
+    }
+</style>

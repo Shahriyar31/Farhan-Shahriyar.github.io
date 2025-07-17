@@ -1,0 +1,87 @@
+---
+const educationData = [
+    {
+        duration: "October 2023 - Present",
+        title: "MSc. in Data Science",
+        institution: "Hamburg University of Technology, Germany",
+        description: "Focusing on advanced machine learning, big data technologies, and statistical analysis."
+    },
+    {
+        duration: "July 2018 - August 2022",
+        title: "B.Tech. in Computer Science and Engineering",
+        institution: "Coochbehar Government Engineering College",
+        description: "Graduated with a CGPA of 8.73/10, building a strong foundation in algorithms and software engineering.",
+        details: {
+            courses: ["Machine Learning", "Python", "Computer Vision", "SDLC", "Operating Systems", "OOP", "Data Structures & Algorithms"],
+            activities: [
+                { icon: "fas fa-trophy", text: "Won the college photography contest." },
+                { icon: "fas fa-cricket-bat-ball", text: "Led the cricket team as captain in inter-college tournaments." },
+                { icon: "fas fa-mountain-sun", text: "Organized and guided multiple trekking adventures." },
+            ],
+            project: "Conducted a final year project focusing on computer vision, exploring innovative solutions to real-world challenges."
+        }
+    }
+];
+---
+<section id="education" class="section">
+    <div>
+        <h2 class="text-4xl font-bold uppercase text-center mb-12 text-slate-900 dark:text-white">
+            <span>My </span>
+            <span class="text-blue-500">Education</span>
+        </h2>
+        <div class="timeline-container relative">
+            {educationData.map(item => (
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <p class="timeline-duration">{item.duration}</p>
+                    <h5 class="text-xl font-semibold uppercase text-slate-800 dark:text-slate-100">{item.title}</h5>
+                    <p class="text-slate-700 dark:text-slate-300">{item.institution}</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">{item.description}</p>
+                    
+                    {item.details && (
+                        <div class="mt-4 border-t border-slate-300 dark:border-gray-700 pt-4">
+                            <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Key Courses:</h6>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">{item.details.courses.join(' • ')}</p>
+                            
+                            <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Activities & Leadership:</h6>
+                            <ul class="space-y-2 mb-4">
+                                {item.details.activities.map(activity => (
+                                    <li class="flex items-center space-x-3 text-sm">
+                                        <i class={`${activity.icon} text-blue-500 w-4 text-center`}></i>
+                                        <span class="text-slate-600 dark:text-slate-400">{activity.text}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Final Year Project:</h6>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">{item.details.project}</p>
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .timeline-container {
+        @apply border-l-2 border-slate-300 dark:border-gray-700 max-w-3xl mx-auto;
+    }
+    .timeline-item {
+        @apply relative pl-16 pb-12;
+    }
+    .timeline-item:not(:last-child) {
+        @apply pb-12;
+    }
+    .timeline-icon {
+        @apply absolute -left-[26px] top-0 bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center;
+    }
+    .timeline-icon i {
+        @apply text-lg text-white;
+    }
+    .timeline-duration {
+        @apply px-3 py-1 bg-slate-200 dark:bg-gray-700 rounded-full inline-block text-xs uppercase font-semibold mb-2;
+    }
+</style>

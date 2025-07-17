@@ -1,0 +1,26 @@
+---
+// This component will be added in a later step
+// import ThemeToggle from './ThemeToggle.astro';
+
+const navLinks = [
+    { href: "#projects", text: "Projects" },
+    { href: "#skills", text: "Skills" },
+    { href: "#photography", text: "Photography" },
+    { href: "#contact", text: "Contact" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#1a1a2e]/80 backdrop-blur-lg">
+    <nav class="container mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+        <a href="#home" class="text-2xl font-bold text-white hover:text-[#007bff] transition-colors">
+            F.S.
+        </a>
+        <div class="hidden md:flex items-center space-x-6">
+            {navLinks.map(link => (
+                <a href={link.href} class="text-gray-300 hover:text-white transition-colors font-medium text-lg">
+                    {link.text}
+                </a>
+            ))}
+        </div>
+        </nav>
+</header>

@@ -1,0 +1,50 @@
+---
+const experienceData = [
+  {
+    duration: "August 2025 - Present",
+    title: "Working Student - Global IT",
+    company: "Nordex SE, Hamburg"
+  }
+];
+---
+<section id="experience" class="section">
+    <div>
+        <h2 class="text-4xl font-bold uppercase text-center mb-12 text-slate-900 dark:text-white">
+            <span>My </span>
+            <span class="text-blue-500">Experience</span>
+        </h2>
+        <div class="timeline-container relative">
+            {experienceData.map(item => (
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <p class="timeline-duration">{item.duration}</p>
+                    <h5 class="text-xl font-semibold uppercase text-slate-800 dark:text-slate-100">{item.title}</h5>
+                    <p class="text-slate-600 dark:text-slate-300">{item.company}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .timeline-container {
+        @apply border-l-2 border-slate-300 dark:border-gray-700 max-w-3xl mx-auto;
+    }
+    .timeline-item {
+        @apply relative pl-16 pb-12;
+    }
+    .timeline-item:not(:last-child) {
+        @apply pb-12;
+    }
+    .timeline-icon {
+        @apply absolute -left-[26px] top-0 bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center;
+    }
+    .timeline-icon i {
+        @apply text-lg text-white;
+    }
+    .timeline-duration {
+        @apply px-3 py-1 bg-slate-200 dark:bg-gray-700 rounded-full inline-block text-xs uppercase font-semibold mb-2;
+    }
+</style>

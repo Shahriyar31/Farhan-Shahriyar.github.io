@@ -1,0 +1,66 @@
+---
+const projects = [
+  {
+    title: "Poultry Shield",
+    description: "AI-powered veterinary diagnostics using Deep Learning to identify poultry diseases from images with 97.51% accuracy.",
+    tags: ["Python", "TensorFlow", "Flask", "AWS EC2"],
+    link: "https://github.com/Shahriyar31/Poultry_Shield-Deep-Learning-for-Poultry-Coccidiosis-Diagnosis"
+  },
+  {
+    title: "StockFlow",
+    description: "Real-time stock market data engineering pipeline using Apache Kafka, S3, and AWS Glue for efficient data processing and analysis.",
+    tags: ["Apache Kafka", "AWS S3", "AWS Glue", "Python"],
+    link: "https://github.com/Shahriyar31/StockFlow-Real-Time-Stock-Market-Data-Engineering-with-Kafka"
+  },
+  {
+    title: "Radiation Tracking",
+    description: "A real-time radiation monitoring and visualization system built with Kafka for data streaming and Docker for containerization.",
+    tags: ["Kafka", "Docker", "GCP", "Node.js"],
+    link: "https://github.com/Shahriyar31/Radiaton_Tracking"
+  },
+  {
+    title: "Book Analysis",
+    description: "An exploratory data analysis of Amazon Book Reviews, using NLP and collaborative filtering to find patterns.",
+    tags: ["Python", "Pandas", "NLP", "Jupyter"],
+    link: "https://github.com/Shahriyar31/Book-Analysis"
+  },
+  {
+    title: "Digital Twin GF3",
+    description: "A collaborative project focused on creating a Digital Twin for a grinding machine using data from an Edge device.",
+    tags: ["Digital Twin", "IoT", "Edge Computing"],
+    link: "https://github.com/rkraeuter/DigitalTwinGF3"
+  },
+  {
+    title: "Your Next Project",
+    description: "This is a placeholder for another one of your amazing data science or machine learning projects.",
+    tags: ["Coming Soon"],
+    link: "#"
+  },
+];
+---
+<section id="projects" class="section">
+    <div>
+        <h2 class="text-4xl font-bold uppercase text-center mb-4 text-slate-900 dark:text-white">
+            <span>My </span>
+            <span class="text-blue-500">Projects</span>
+        </h2>
+        <p class="text-center text-slate-600 dark:text-slate-300 opacity-80 mb-12 max-w-2xl mx-auto">A selection of my work, showcasing skills in software engineering and data science.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => (
+            <div class="bg-white dark:bg-slate-900 rounded-lg p-6 flex flex-col border border-slate-200 dark:border-slate-800 hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
+              <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">{project.title}</h3>
+              <p class="text-slate-600 dark:text-slate-400 opacity-90 mb-4 flex-grow text-sm">{project.description}</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.tags.map(tag => (
+                  <span class="bg-slate-100 dark:bg-gray-700 text-blue-600 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full">{tag}</span>
+                ))}
+              </div>
+              <a href={project.link} target="_blank" class="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-500 dark:hover:text-blue-300 transition-colors mt-auto self-start text-sm">
+                View on GitHub &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+    </div>
+</section>

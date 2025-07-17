@@ -1,0 +1,47 @@
+---
+---
+<div class="fixed top-1/2 right-4 transform -translate-y-1/2 z-50 flex flex-col items-center space-y-3">
+    <a href="#home" class="control active-btn" title="Home">
+        <i class="fas fa-home"></i>
+    </a>
+    <a href="#projects" class="control" title="Projects">
+        <i class="fas fa-briefcase"></i>
+    </a>
+    <a href="#skills" class="control" title="Skills">
+        <i class="fas fa-cogs"></i>
+    </a>
+    <a href="#experience" class="control" title="Experience">
+        <i class="fas fa-business-time"></i>
+    </a>
+    <a href="#education" class="control" title="Education">
+        <i class="fas fa-user-graduate"></i>
+    </a>
+    <a href="#photography" class="control" title="Photography">
+        <i class="fas fa-camera-retro"></i>
+    </a>
+    <a href="#contact" class="control" title="Contact">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+</div>
+
+<div class="fixed top-4 right-4 z-50 theme-btn">
+    <i class="fas fa-adjust"></i>
+</div>
+
+<style>
+    .control, .theme-btn {
+        @apply w-12 h-12 rounded-full bg-slate-200 dark:bg-gray-700 flex items-center justify-center cursor-pointer shadow-lg transition-all duration-300 ease-in-out;
+    }
+    .control i, .theme-btn i {
+        @apply text-lg text-gray-700 dark:text-gray-300 pointer-events-none;
+    }
+    .active-btn {
+        @apply bg-blue-500 -translate-y-1;
+    }
+    .active-btn i {
+        @apply text-white;
+    }
+    .control:not(.active-btn):hover {
+        @apply bg-slate-300 dark:bg-gray-600 -translate-y-1;
+    }
+</style>
