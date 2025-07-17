@@ -1,0 +1,1 @@
+import{g as t,S as e}from"./ScrollTrigger.CUwdeFQJ.js";t.registerPlugin(e);document.addEventListener("DOMContentLoaded",()=>{const r=t.utils.toArray(".project-card");r.length>0&&(t.set(r,{autoAlpha:0,y:50}),e.batch(r,{onEnter:o=>t.to(o,{autoAlpha:1,y:0,stagger:.1,ease:"power3.out",duration:.8}),start:"top 85%"}))});
