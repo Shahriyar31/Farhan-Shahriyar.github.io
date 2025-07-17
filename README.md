@@ -1,47 +1,55 @@
-# Astro Starter Kit: Minimal
+<p align="center">
+  <img src="public/profile.jpg" alt="Farhan Shahriyar" width="150" style="border-radius: 50%;" />
+</p>
 
-```sh
-npm create astro@latest -- --template minimal
-```
+<h1 align="center">Farhan Shahriyar - Personal Portfolio</h1>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+<p align="center">
+  A modern, animated, and fully responsive personal portfolio website built with Astro, Tailwind CSS, and GSAP to showcase my skills, projects, and passion for photography.
+</p>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+<p align="center">
+  <a href="https://www.linkedin.com/in/farhanshahriyar" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
+  <a href="https://github.com/Shahriyar31" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
+  <a href="mailto:shahriyarfarhan3101@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/></a>
+</p>
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🚀 Live Demo
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+**[Link to Your Deployed Site]** <br>
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+_Note: You can create a GIF of your site in action and add it here._ 
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## ✨ Features
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **Smooth Scrolling:** Built with **Lenis** for a fluid, high-quality scrolling experience.
+- **Advanced Animations:** Scroll-triggered animations powered by **GSAP (GreenSock Animation Platform)** to bring the content to life.
+- **Light & Dark Mode:** A theme toggle that respects the user's system preference and saves their choice.
+- **Fully Responsive:** A mobile-first design that looks great on all devices.
+- **Interactive Photo Gallery:** A grid for 58 photos with a "Show More" button and a full-screen lightbox view.
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## 🛠️ Tech Stack
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+This project was built using these modern technologies:
 
-## 👀 Want to learn more?
+| Tech | Icon |
+|---|---|
+| **Astro** | <img src="https://img.shields.io/badge/Astro-BC52EE?style=for-the-badge&logo=astro&logoColor=white" alt="Astro" /> |
+| **Tailwind CSS** | <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /> |
+| **JavaScript** | <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" /> |
+| **GSAP** | <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" /> |
+| **Lenis** | Smooth Scroll Library |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+
+## 📬 Contact
+
+Feel free to connect with me!
+
+- **LinkedIn:** [linkedin.com/in/farhanshahriyar](https://www.linkedin.com/in/farhanshahriyar)
+- **GitHub:** [@Shahriyar31](https://github.com/Shahriyar31)
