@@ -51,7 +51,8 @@ function setupPhotographySection() {
                 const item = document.createElement('div');
                 item.className = 'grid-photo-item';
                 const img = document.createElement('img');
-                img.src = photoSrc;
+                // Use the photoSrc directly as it already includes the base path
+                img.src = photoSrc; 
                 img.alt = "A photograph by Farhan Shahriyar";
                 img.loading = "lazy";
                 img.className = 'gallery-image';
@@ -107,41 +108,34 @@ function setupPhotographySection() {
     // (This section remains unchanged from the previous version)
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
-    const closeBtn = document.getElementById('close-lightbox');
-    const photographySection = document.getElementById('photography');
-    let hoverTimer = null;
-    if (lightbox && lightboxImage && closeBtn && photographySection) {
-        const openLightboxWithAnimation = (imageElement) => {
-            const startState = Flip.getState(imageElement);
-            lightboxImage.src = imageElement.src;
-            lightbox.classList.remove('hidden');
-            Flip.from(startState, {
-                target: lightboxImage,
-                duration: 0.7,
-                ease: "power3.inOut"
+    const closeLightbox = document.getElementById('close-lightbox');
+
+    if (lightbox && lightboxImage && closeLightbox) {
+        document.body.addEventListener('click', (e) => {
+            if (e.target.classList.contains('gallery-image')) {
+                // The src from the clicked image should already be correct
+                lightboxImage.src = e.target.src;
+                lightbox.classList.remove('hidden');
+                gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+            }
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            gsap.to(lightbox, { 
+                opacity: 0, 
+                duration: 0.3,
+                onComplete: () => {
+                    lightbox.classList.add('hidden');
+                    lightboxImage.src = ""; // Clear src after hiding
+                }
             });
-        };
-        photographySection.addEventListener('mouseover', (e) => {
-            if (e.target && e.target.classList.contains('gallery-image')) {
-                hoverTimer = setTimeout(() => {
-                    openLightboxWithAnimation(e.target);
-                }, 3000);
-            }
-        });
-        photographySection.addEventListener('mouseout', (e) => {
-            if (e.target && e.target.classList.contains('gallery-image')) {
-                clearTimeout(hoverTimer);
-            }
-        });
-        const closeLightbox = () => {
-            clearTimeout(hoverTimer);
-            lightbox.classList.add('hidden');
-        };
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
         });
     }
 }
 
-document.addEventListener('DOMContentLoaded', setupPhotographySection);
+// Wait for the DOM to be fully loaded before running the script
+if (document.readyState === "loading") {
+    document.addEventListener('DOMContentLoaded', setupPhotographySection);
+} else {
+    setupPhotographySection();
+}

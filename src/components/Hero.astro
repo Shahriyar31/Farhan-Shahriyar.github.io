@@ -37,7 +37,7 @@ const details = [
     <div class="hidden lg:block lg:fixed lg:top-12 lg:left-12 lg:z-10">
         <div class="hero-image-rotator relative w-[400px] h-[400px]" style="transform-style: preserve-3d; perspective: 1500px;">
             <div class="image-content-wrapper">
-                <img src="/images/profile.jpg" alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
+                <img src={`${import.meta.env.BASE_URL}/images/profile.jpg`} alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@ const details = [
             <div class="lg:hidden flex justify-center mb-12">
                  <div class="relative w-64 h-64">
                     <div class="image-content-wrapper">
-                         <img src="/images/profile.jpg" alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
+                         <img src={`${import.meta.env.BASE_URL}/images/profile.jpg`} alt="Farhan Shahriyar Profile Picture" class="object-cover w-full h-full rounded-full"/>
                     </div>
                  </div>
             </div>
