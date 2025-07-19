@@ -7,12 +7,10 @@ const details = [
     { icon: "💬", title: "Ask me about:", content: "Data Science, Machine Learning, Python Development, GCP, AWS, and deploying containerized applications using Docker." },
     { icon: "⚡", title: "Fun fact:", content: "I sometimes refer to my GPU as my 'co-pilot' for late-night coding marathons." }
 ];
-// We duplicate the first item and add it to the end to create a seamless loop for the marquee
-const marqueeDetails = [...details, details[0]];
 ---
 <section id="home" class="section lg:grid lg:grid-cols-[500px_1fr] lg:gap-8 lg:items-center min-h-screen">
     
-    <div class="hero-image-pane hidden lg:flex">
+    <div class="hero-image-pane hidden lg:flex items-start justify-start pt-8 pl-8">
         <div class="hero-image-rotator relative w-[400px] h-[400px]" style="transform-style: preserve-3d; perspective: 1500px;">
             <div class="blob"></div>
             <div class="image-content-wrapper">
@@ -32,29 +30,31 @@ const marqueeDetails = [...details, details[0]];
         </div>
 
         <div class="w-full text-center lg:text-left">
-            <h1 id="hero-headline" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 leading-tight break-words">
-                Hi, I'm <span class="text-blue-500">Farhan Shahriyar</span>
+            <h1 id="hero-headline" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-4 leading-tight break-words">
+                Hi, I'm <span id="animated-name">Farhan Shahriyar</span>
             </h1>
             <h2 id="hero-subheading" class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-800 dark:text-slate-200 font-semibold mb-8">
                 A Data Scientist & ML Engineer.
             </h2>
             
-            <p id="about-me-summary" class="max-w-xl mx-auto lg:mx-0 text-slate-600 dark:text-slate-400 mb-10">
-                Results-driven MSc Data Science student at Hamburg University of Technology with hands-on experience in Al model development, Data Engineering, and cloud-based deployments. Strong foundation in Python, ML frameworks, and big data tools. Eager to contribute to Al-driven innovations in a dynamic and collaborative environment.
-            </p>
-
-            <div id="details-marquee" class="max-w-xl mx-auto lg:mx-0">
-                <div class="marquee-track-vertical">
-                    {marqueeDetails.map((item) => (
-                        <div class="marquee-item-vertical">
-                            <h4 class="flex items-center text-lg font-semibold text-slate-800 dark:text-slate-200">
-                                <span class="text-2xl mr-3">{item.icon}</span>
-                                {item.title}
-                            </h4>
-                            <p class="pt-2 pl-10 text-slate-600 dark:text-slate-400">{item.content}</p>
-                        </div>
-                    ))}
+            <div class="max-w-xl mx-auto lg:mx-0 mt-10 space-y-4">
+                <div class="detail-card">
+                    <p class="text-slate-600 dark:text-slate-300">
+                        Results-driven MSc Data Science student with hands-on experience in Al model development, Data Engineering, and cloud-based deployments. Eager to contribute to Al-driven innovations in a dynamic and collaborative environment.
+                    </p>
                 </div>
+                
+                {details.map((item) => (
+                    <div class="detail-card">
+                        <div class="flex items-start">
+                            <span class="text-2xl pt-1">{item.icon}</span>
+                            <div class="ml-4">
+                                <h4 class="font-semibold text-slate-800 dark:text-slate-200">{item.title}</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400">{item.content}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     </div>
@@ -65,7 +65,12 @@ const marqueeDetails = [...details, details[0]];
         0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
         50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
     }
-    .hero-image-pane { @apply h-screen sticky top-0 items-center justify-center; }
+    @keyframes gradient-animate {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .hero-image-pane { @apply h-screen sticky top-0; }
     .hero-content-pane { @apply py-16 lg:py-0; }
     .blob {
         @apply absolute w-[105%] h-[105%] top-[-2.5%] left-[-2.5%];
@@ -74,17 +79,30 @@ const marqueeDetails = [...details, details[0]];
         opacity: 0.5;
     }
     .image-content-wrapper { @apply relative w-full h-full rounded-full bg-slate-200 dark:bg-gray-800 shadow-2xl p-2 z-10; }
+    
+    #animated-name {
+        background-image: linear-gradient(90deg, 
+            theme('colors.sky.400'), 
+            theme('colors.violet.500'), 
+            theme('colors.sky.400')
+        );
+        background-size: 200% 200%;
+        animation: gradient-animate 5s ease-in-out infinite;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+    }
+    #animated-name .char { display: inline-block; }
 
-    #details-marquee {
-        @apply relative overflow-hidden;
-        height: 130px;
+    /* --- NEW: Glassmorphism style for the detail cards --- */
+    .detail-card {
+        @apply p-4 rounded-xl text-left
+               bg-white/40 dark:bg-slate-800/50 backdrop-blur-md 
+               border border-white/20 dark:border-slate-700/50
+               transition-all duration-300;
     }
-    .marquee-track-vertical {
-        @apply absolute top-0 left-0 w-full;
-    }
-    .marquee-item-vertical {
-        @apply w-full mb-4;
-        height: 130px;
+    .detail-card:hover {
+        @apply border-blue-500/50 transform -translate-y-1 shadow-xl;
     }
 </style>
 
@@ -94,42 +112,53 @@ const marqueeDetails = [...details, details[0]];
     gsap.registerPlugin(ScrollTrigger);
 
     document.addEventListener('DOMContentLoaded', () => {
-        // --- Headline & Scroll animations remain the same ---
-        gsap.from("#hero-headline, #hero-subheading", {
-            delay: 0.5, duration: 1, opacity: 0, y: 30, ease: "power3.out", stagger: 0.2
-        });
-        
-        // NEW: Entrance animation for the About Me summary
-        gsap.from("#about-me-summary", {
-            delay: 0.9, // Start after the subheading
-            duration: 1,
-            opacity: 0,
-            y: 30,
-            ease: "power3.out"
-        });
-
+        // --- PRESERVED: Profile picture scroll animation ---
         const imageRotator = document.querySelector('.hero-image-rotator');
         if (imageRotator) {
             gsap.to(imageRotator, {
-                scrollTrigger: { trigger: ".hero-content-pane", start: "top top", end: "bottom bottom", scrub: 1.5, },
-                rotationY: -90, rotationZ: 45, ease: "power1.out"
+                scrollTrigger: {
+                    trigger: ".hero-content-pane",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1.5,
+                },
+                rotationY: -90,
+                rotationZ: 45,
+                ease: "power1.out"
             });
         }
         
-        // --- Vertical Marquee Animation ---
-        const marqueeTrack = document.querySelector('.marquee-track-vertical');
-        if (marqueeTrack) {
-            const detailsCount = marqueeTrack.children.length - 1;
-            const marqueeItem = marqueeTrack.querySelector('.marquee-item-vertical');
-            const itemHeight = marqueeItem ? (marqueeItem as HTMLElement).offsetHeight : 0;
-            const totalHeight = itemHeight * detailsCount;
-
-            gsap.to(marqueeTrack, {
-                y: -totalHeight,
-                duration: detailsCount * 4,
-                ease: "none",
-                repeat: -1
+        // --- Enhanced Text Animations ---
+        const tl = gsap.timeline({delay: 0.5});
+        
+        const nameEl = document.getElementById('animated-name');
+        if (nameEl) {
+            const text = nameEl.innerText;
+            nameEl.innerHTML = '';
+            text.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.innerHTML = char === ' ' ? '&nbsp;' : char;
+                nameEl.appendChild(span);
+            });
+            tl.from(nameEl.querySelectorAll('.char'), {
+                opacity: 0,
+                y: 20,
+                stagger: 0.05,
+                ease: 'power2.out'
             });
         }
+        
+        tl.from("#hero-subheading", { opacity: 0, x: -30, ease: "power3.out" }, "-=0.8");
+
+        // --- Staggered animation for the new detail cards ---
+        gsap.from('.detail-card', {
+            opacity: 0,
+            y: 20,
+            stagger: 0.1,
+            delay: 1.2,
+            duration: 0.8,
+            ease: 'power3.out'
+        });
     });
 </script>

@@ -1,120 +1,85 @@
 ---
-// No frontmatter needed for this component
+// src/components/Controls.astro
 ---
-<div class="fixed top-1/2 right-4 transform -translate-y-1/2 z-50">
-    <div class="relative flex flex-col items-center space-y-3" id="nav-controls">
-        
-        <div id="nav-active-line" class="absolute h-12 w-1.5 rounded-full left-[-12px]"></div>
-
-        <a href="#home" class="control" data-section="home" title="Home">
-            <i class="fas fa-home"></i>
-        </a>
-        <a href="#projects" class="control" data-section="projects" title="Projects">
-            <i class="fas fa-briefcase"></i>
-        </a>
-        <a href="#skills" class="control" data-section="skills" title="Skills">
-            <i class="fas fa-cogs"></i>
-        </a>
-        <a href="#experience" class="control" data-section="experience" title="Experience">
-            <i class="fas fa-business-time"></i>
-        </a>
-        <a href="#education" class="control" data-section="education" title="Education">
-            <i class="fas fa-user-graduate"></i>
-        </a>
-        <a href="#photography" class="control" data-section="photography" title="Photography">
-            <i class="fas fa-camera-retro"></i>
-        </a>
-        <a href="#contact" class="control" data-section="contact" title="Contact">
-            <i class="fas fa-envelope-open"></i>
-        </a>
-    </div>
+<div class="fixed top-1/2 right-4 transform -translate-y-1/2 z-50 flex flex-col items-center space-y-3">
+    <a href="#home" class="control active-btn" title="Home">
+        <i class="fas fa-home"></i>
+    </a>
+    <a href="#projects" class="control" title="Projects">
+        <i class="fas fa-briefcase"></i>
+    </a>
+    <a href="#skills" class="control" title="Skills">
+        <i class="fas fa-cogs"></i>
+    </a>
+    <a href="#experience" class="control" title="Experience">
+        <i class="fas fa-business-time"></i>
+    </a>
+    <a href="#education" class="control" title="Education">
+        <i class="fas fa-user-graduate"></i>
+    </a>
+    <a href="#photography" class="control" title="Photography">
+        <i class="fas fa-camera-retro"></i>
+    </a>
+    <a href="#contact" class="control" title="Contact">
+        <i class="fas fa-envelope-open"></i>
+    </a>
 </div>
 
-<div class="fixed top-6 right-4 z-50 theme-btn">
+<div class="fixed top-4 right-4 z-50 theme-btn">
     <i class="fas fa-adjust"></i>
 </div>
 
 <style>
-    /* UPDATED: Buttons now have the glassmorphism style */
     .control, .theme-btn {
-        @apply w-12 h-12 rounded-full flex items-center justify-center cursor-pointer
-               bg-white/30 dark:bg-slate-800/40 backdrop-blur-lg
-               border border-white/20 dark:border-slate-700/50
-               transition-all duration-300;
+        @apply w-12 h-12 rounded-full bg-slate-200 dark:bg-gray-700 flex items-center justify-center cursor-pointer shadow-lg transition-all duration-300 ease-in-out;
     }
-    
     .control i, .theme-btn i {
-        @apply text-lg text-slate-700 dark:text-gray-300 pointer-events-none;
+        @apply text-lg text-gray-700 dark:text-gray-300 pointer-events-none;
     }
-
-    /* The active button now has a glowing effect instead of a solid color */
     .active-btn {
-        @apply shadow-lg border-blue-500/50;
-        box-shadow: 0 0 15px theme('colors.blue.500 / 50%');
+        @apply bg-blue-500 -translate-y-1;
     }
     .active-btn i {
-        @apply text-blue-500;
+        @apply text-white;
     }
-
-    .control:not(.active-btn):hover, .theme-btn:hover {
-        @apply -translate-y-1 shadow-md;
-    }
-
-    /* NEW: Styles for the animated gradient line */
-    #nav-active-line {
-        background: linear-gradient(to bottom, theme('colors.sky.400'), theme('colors.violet.500'));
-        transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for the 'top' property */
+    .control:not(.active-btn):hover {
+        @apply bg-slate-300 dark:bg-gray-600 -translate-y-1;
     }
 </style>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    gsap.registerPlugin(ScrollTrigger);
-
+    // This new script handles the theme toggle and persists the choice.
     document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('.section');
-        const navLinks = document.querySelectorAll('.control');
-        const activeLine = document.getElementById('nav-active-line');
+        const themeBtn = document.querySelector('.theme-btn');
+        const htmlEl = document.documentElement;
 
-        // This function moves the line and updates the active button
-        /**
-         * @param {HTMLElement} activeLink
-         */
-        const setActive = (activeLink: HTMLElement) => {
-            navLinks.forEach(link => link.classList.remove('active-btn'));
-            activeLink.classList.add('active-btn');
-            
-            // Animate the line to the position of the active button
-            gsap.to(activeLine, {
-                top: activeLink.offsetTop,
-                duration: 0.4,
-                ease: 'power2.out'
-            });
+        // Function to apply the theme
+        const applyTheme = (theme: string) => {
+            if (theme === 'light') {
+                htmlEl.classList.add('light-mode');
+                htmlEl.classList.remove('dark');
+            } else {
+                htmlEl.classList.remove('light-mode');
+                htmlEl.classList.add('dark');
+            }
         };
 
-        // Set the initial position for the "Home" button
-        const homeLink = document.querySelector('.control[data-section="home"]') as HTMLElement;
-        if (homeLink) {
-            setActive(homeLink);
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
         }
 
-        // Use ScrollTrigger to detect which section is in view
-        sections.forEach(section => {
-            ScrollTrigger.create({
-                trigger: section,
-                start: "top center",
-                end: "bottom center",
-                onToggle: self => {
-                    if (self.isActive) {
-                        const sectionId = section.getAttribute('id');
-                        const correspondingLink = document.querySelector(`.control[data-section="${sectionId}"]`);
-                        if (correspondingLink) {
-                            setActive(correspondingLink as HTMLElement);
-                        }
-                    }
+        // Add click listener to the button if it exists
+        if (themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                let newTheme = 'dark';
+                if (htmlEl.classList.contains('dark')) {
+                    newTheme = 'light';
                 }
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
             });
-        });
+        }
     });
 </script>

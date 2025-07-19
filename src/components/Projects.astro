@@ -40,14 +40,13 @@ const projects = [
 
 <style>
     .project-card {
-        @apply h-auto md:h-96 /* Allow height to be auto on mobile, fixed on larger screens */
-               relative flex flex-col rounded-2xl overflow-hidden
-               /* UPDATED: Brighter gradient for dark mode */
-               bg-gradient-to-br from-white/40 via-white/20 to-white/40
-               dark:from-slate-800/80 dark:via-slate-800/50 dark:to-slate-800/80
-               backdrop-blur-lg border border-white/30 dark:border-slate-700
-               transition-all duration-300 no-underline;
-    }
+    @apply h-auto md:h-96 
+           relative flex flex-col rounded-2xl overflow-hidden
+           backdrop-blur-lg transition-all duration-300 no-underline;
+    
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+}
     
     .project-card::before {
         content: '';

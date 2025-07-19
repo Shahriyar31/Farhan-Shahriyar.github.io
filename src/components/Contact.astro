@@ -1,8 +1,11 @@
+---
+// No changes to the frontmatter
+---
 <section id="contact" class="section">
     <div class="container mx-auto px-4 pr-20 lg:pr-4">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             
-            <div class="lg:col-span-2 p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-lg w-full max-w-md mx-auto lg:w-96 lg:h-96 flex flex-col justify-center items-center">
+            <div class="lg:col-span-2 contact-profile-card">
                 <img src={`${import.meta.env.BASE_URL}/images/profile.jpg`} alt="Profile Picture" class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-blue-500 p-1">
                 <h3 class="text-2xl font-semibold mb-2 text-slate-900 dark:text-white">Farhan Shahriyar</h3>
                 <p class="text-slate-600 dark:text-slate-300 mb-8">Data Scientist & ML Engineer</p>
@@ -49,15 +52,23 @@
 </section>
 
 <style>
-    /* Styling for the form fields */
+    /* 2. NEW STYLE for the profile card with the glassmorphism effect */
+    .contact-profile-card {
+        @apply p-6 rounded-2xl shadow-lg w-full max-w-md mx-auto 
+               lg:w-96 lg:h-96 flex flex-col justify-center items-center
+               backdrop-blur-lg;
+
+        background-color: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+    }
+
     .form-input {
         @apply block w-full p-4 bg-slate-100 dark:bg-slate-800 border border-transparent rounded-lg 
                placeholder-slate-400 dark:placeholder-slate-500
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                transition-all duration-300;
     }
-
-    /* Styling for the social icons */
+    
     .icon-link i {
         @apply text-3xl text-gray-500 dark:text-gray-400 transition-transform duration-300;
     }
