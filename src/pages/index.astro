@@ -13,14 +13,18 @@ import '../styles/global.css';
 <html lang="en" class="dark">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
 		<meta name="viewport" content="width=device-width" />
 		<title>Farhan Shahriyar | Portfolio</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 	</head>
-	<body class="bg-[#F5F5DC] dark:bg-[#191d2b] transition-colors duration-300">
+	 <body>
+        <div class="background-blobs">
+            <div class="blob-1"></div>
+            <div class="blob-2"></div>
+        </div>
 		<Controls />
-		<main class="container mx-auto">
+		<main class="main-content container mx-auto">
 			<Hero />
 			<Projects />
 			<Skills />
@@ -31,6 +35,7 @@ import '../styles/global.css';
 		</main>
 		<script>
             import "../scripts/main.js";
+			import "../scripts/animations.js";
         </script>
 	</body>
 </html>

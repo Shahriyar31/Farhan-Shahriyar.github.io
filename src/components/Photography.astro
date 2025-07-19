@@ -1,15 +1,12 @@
 ---
-// photography.astro
-
 const photoCount = 58;
 const allPhotos = Array.from({ length: photoCount }, (_, i) => `${import.meta.env.BASE_URL}/images/photo${i + 1}.jpg`);
 
-// We still need the first 20 for the marquee's HTML
 const marqueePhotos = allPhotos.slice(0, 20);
-// The 'gridPhotos' variable is no longer needed here.
+const gridPhotos = allPhotos.slice(20);
 ---
 <section id="photography" class="section">
-    <div>
+    <div class="container mx-auto px-4 pr-20 lg:pr-4">
         <h2 class="text-4xl font-bold uppercase text-center mb-4 text-slate-900 dark:text-white">
             My <span class="text-blue-500">Photography</span>
         </h2>
@@ -28,6 +25,7 @@ const marqueePhotos = allPhotos.slice(0, 20);
         </div>
 
         <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8"></div>
+
         <div id="controls-container" class="text-center mt-12">
             <div id="finale-message" class="text-2xl font-bold text-slate-700 dark:text-slate-300 hidden mb-4">That's all of them! 🎉</div>
             <button id="toggle-photos-btn" class="bg-blue-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-600 transition-colors">
@@ -51,9 +49,7 @@ const marqueePhotos = allPhotos.slice(0, 20);
     .grid-photo-item img { @apply absolute top-0 left-0 w-full h-full object-cover cursor-pointer; }
 </style>
 
-<script define:vars={{ allPhotos, baseUrl: import.meta.env.BASE_URL }} is:inline>
+<script define:vars={{ allPhotos }} is:inline>
     window.allPhotos = allPhotos;
-    window.BASE_URL = baseUrl;
 </script>
-
 <script src="../scripts/photo-gallery.js"></script>

@@ -12,51 +12,66 @@ const educationData = [
         institution: "Coochbehar Government Engineering College",
         description: "Graduated with a CGPA of 8.73/10, building a strong foundation in algorithms and software engineering.",
         details: {
-            courses: ["Machine Learning", "Python", "Computer Vision", "SDLC", "Operating Systems", "OOP", "Data Structures & Algorithms"],
-            activities: [
-                { icon: "fas fa-trophy", text: "Won the college photography contest." },
-                { icon: "fas fa-cricket-bat-ball", text: "Led the cricket team as captain in inter-college tournaments." },
-                { icon: "fas fa-mountain-sun", text: "Organized and guided multiple trekking adventures." },
+            courses: [
+                "Algorithms",
+                "Data Structures",
+                "Operating Systems",
+                "Database Management",
+                "Software Engineering"
             ],
-            project: "Conducted a final year project focusing on computer vision, exploring innovative solutions to real-world challenges."
+            activities: [
+                { icon: "fa-solid fa-users", text: "Student Council Member" },
+                { icon: "fa-solid fa-chalkboard-teacher", text: "Teaching Assistant" }
+            ],
+            project: "Developed a machine learning model for predicting student performance using Python and scikit-learn."
         }
     }
 ];
 ---
 <section id="education" class="section">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold uppercase text-center mb-16 text-slate-900 dark:text-white">
+    <div class="container mx-auto px-4 pr-20 lg:pr-4 py-16">
+        <h2 class="text-4xl font-bold uppercase text-center mb-16 text-slate-900 dark:text-white section-title">
             <span>My </span>
             <span class="text-blue-500">Education</span>
         </h2>
         
-        <div class="timeline-container">
+        <div class="space-y-8">
             {educationData.map((item, index) => (
-                <div class={`timeline-item group ${index % 2 !== 0 ? 'timeline-item-left' : ''}`}>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <p class="timeline-duration">{item.duration}</p>
+                <div class="timeline-card group">
+                    <div class="card-icon-background">
+                        {index === 0 ? (
+                            <>
+                                <i class="fa-solid fa-graduation-cap icon-bg" style="--delay: 0s; --duration: 20s;"></i>
+                                <i class="fa-solid fa-flask-vial icon-bg" style="--delay: -10s; --duration: 25s;"></i>
+                            </>
+                        ) : (
+                            <>
+                                <i class="fa-solid fa-book-open-reader icon-bg" style="--delay: -3s; --duration: 22s;"></i>
+                                <i class="fa-solid fa-trophy icon-bg" style="--delay: -12s; --duration: 18s;"></i>
+                            </>
+                        )}
+                    </div>
+                    
+                    <div class="relative z-10">
+                       <p class="timeline-duration">{item.duration}</p>
                         <h5 class="text-xl font-semibold uppercase text-slate-800 dark:text-slate-100">{item.title}</h5>
-                        <p class="text-slate-700 dark:text-slate-300">{item.institution}</p>
-                        <p class="text-slate-600 dark:text-slate-400 mt-2">{item.description}</p>
+                        <p class="text-lg text-slate-700 dark:text-slate-300">{item.institution}</p>
+                        <p class="text-base text-slate-600 dark:text-slate-400 mt-2">{item.description}</p>
                         
                         {item.details && (
-                            <div class="mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
-                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Key Courses:</h6>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">{item.details.courses.join(' • ')}</p>
+                            <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-700">
+                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2 text-lg">Key Courses:</h6>
+                                <p class="text-lg text-slate-600 dark:text-slate-400 mb-4">{item.details.courses.join(' • ')}</p>
                                 
-                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Activities & Leadership:</h6>
-                                <ul class="space-y-2 mb-4">
+                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2 text-lg">Activities & Leadership:</h6>
+                                <ul class="space-y-2 mb-4 text-lg text-slate-600 dark:text-slate-400">
                                     {item.details.activities.map(activity => (
-                                        <li class="flex items-center space-x-3 text-sm">
-                                            <i class={`${activity.icon} text-blue-500 w-4 text-center`}></i>
-                                            <span class="text-slate-600 dark:text-slate-400">{activity.text}</span>
-                                        </li>
+                                        <li class="flex items-center"><i class={`${activity.icon} text-blue-500 dark:text-sky-300 w-6 text-center`}></i>{activity.text}</li>
                                     ))}
                                 </ul>
 
-                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2">Final Year Project:</h6>
-                                <p class="text-sm text-slate-600 dark:text-slate-400">{item.details.project}</p>
+                                <h6 class="font-semibold text-blue-600 dark:text-blue-400 mb-2 text-lg">Final Year Project:</h6>
+                                <p class="text-lg text-slate-600 dark:text-slate-400">{item.details.project}</p>
                             </div>
                         )}
                     </div>
@@ -67,34 +82,57 @@ const educationData = [
 </section>
 
 <style>
-    /* REMOVED max-width and mx-auto to make the container full-width */
-    .timeline-container { @apply relative w-full; }
-    .timeline-container::after { content: ''; @apply absolute top-0 left-1/2 w-1 h-full bg-slate-300 dark:bg-gray-700 -ml-[2px] rounded-full; }
-    .timeline-item { @apply relative mb-12 pl-[calc(50%+30px)] w-full; }
-    .timeline-item-left { @apply pl-0 pr-[calc(50%+30px)] text-right; }
-    .timeline-dot { @apply absolute top-1 left-1/2 w-6 h-6 bg-slate-200 dark:bg-gray-600 rounded-full -ml-3 border-4 border-white dark:border-slate-900 z-10 transition-colors duration-300 group-hover:bg-blue-500; }
-    .timeline-item-left .timeline-dot { @apply -mr-3; }
-    /* INCREASED padding from p-6 to p-8 to make cards bigger */
-    .timeline-content { @apply bg-white dark:bg-slate-900 p-8 rounded-lg shadow-lg border border-slate-200 dark:border-slate-800 transition-transform duration-300 group-hover:-translate-y-1; }
-    .timeline-item-left .timeline-content { @apply text-left; }
-    .timeline-content::before { content: ''; @apply absolute top-6 -left-2.5 w-5 h-5 bg-white dark:bg-slate-900 rotate-45 border-l border-b border-slate-200 dark:border-slate-800; }
-    .timeline-item-left .timeline-content::before { @apply left-auto -right-2.5 border-l-0 border-b-0 border-r border-t; }
-    .timeline-duration { @apply px-3 py-1 bg-slate-200 dark:bg-gray-700 rounded-full inline-block text-xs uppercase font-semibold mb-3; }
+    /* These styles are identical to the experience section for consistency */
+    @keyframes float-around {
+        0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        25% { transform: translateY(-15px) translateX(10px) rotate(8deg); }
+        50% { transform: translateY(0px) translateX(-10px) rotate(0deg); }
+        75% { transform: translateY(15px) translateX(5px) rotate(-8deg); }
+    }
+    .timeline-card {
+        @apply relative p-8 overflow-hidden rounded-2xl
+               transition-all duration-300 ease-in-out
+               bg-gradient-to-br from-white/40 via-white/20 to-white/40
+               dark:from-slate-800/80 dark:via-slate-800/50 dark:to-slate-800/80
+               backdrop-blur-lg border border-white/30 dark:border-slate-700;
+    }
+    .timeline-card:hover {
+        transform: translateY(-5px);
+        @apply shadow-xl border-blue-500/30;
+    }
+    .timeline-card::after {
+        content: '';
+        @apply absolute inset-0 z-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100;
+        background: radial-gradient(
+            circle 400px at var(--mouse-x, -999px) var(--mouse-y, -999px),
+            theme('colors.sky.400 / 25%'),
+            transparent 70%
+        );
+    }
+    .timeline-duration { @apply px-3 py-1 bg-slate-100 dark:bg-slate-700 text-blue-600 dark:text-blue-300 rounded-full inline-block text-sm uppercase font-semibold mb-3; }
+    
+    .card-icon-background { @apply absolute inset-0 z-0; }
+    .icon-bg {
+        @apply absolute text-[8rem] text-slate-200/60 dark:text-slate-900/40 top-[20%] right-[-5%];
+        animation: float-around linear infinite;
+        animation-duration: var(--duration);
+        animation-delay: var(--delay);
+    }
+    .icon-bg:nth-of-type(1) { @apply top-[15%] left-[70%]; }
+    .icon-bg:nth-of-type(2) { @apply top-[60%] left-[15%]; }
 </style>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    gsap.registerPlugin(ScrollTrigger);
     document.addEventListener('DOMContentLoaded', () => {
-        const items = gsap.utils.toArray('#education .timeline-item');
-        items.forEach(item => {
-            const el = item as HTMLElement;
-            const isLeft = el.classList.contains('timeline-item-left');
-            gsap.set(el, { autoAlpha: 0, x: isLeft ? -100 : 100, y: 50 });
-            gsap.to(el, {
-                scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
-                autoAlpha: 1, x: 0, y: 0, duration: 0.8, ease: "power3.out"
+        const cards = document.querySelectorAll('#education .timeline-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const mouseEvent = e as MouseEvent;
+                const x = mouseEvent.clientX - rect.left;
+                const y = mouseEvent.clientY - rect.top;
+                (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+                (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
             });
         });
     });

@@ -1,54 +1,24 @@
 ---
 const projects = [
-  {
-    title: "Poultry Shield",
-    description: "AI-powered veterinary diagnostics using Deep Learning to identify poultry diseases from images with 97.51% accuracy.",
-    tags: ["Python", "TensorFlow", "Flask", "AWS EC2"],
-    link: "https://github.com/Shahriyar31/Poultry_Shield-Deep-Learning-for-Poultry-Coccidiosis-Diagnosis"
-  },
-  {
-    title: "StockFlow",
-    description: "Real-time stock market data engineering pipeline using Apache Kafka, S3, and AWS Glue for efficient data processing and analysis.",
-    tags: ["Apache Kafka", "AWS S3", "AWS Glue", "Python"],
-    link: "https://github.com/Shahriyar31/StockFlow-Real-Time-Stock-Market-Data-Engineering-with-Kafka"
-  },
-  {
-    title: "Radiation Tracking",
-    description: "A real-time radiation monitoring and visualization system built with Kafka for data streaming and Docker for containerization.",
-    tags: ["Kafka", "Docker", "GCP", "Node.js"],
-    link: "https://github.com/Shahriyar31/Radiaton_Tracking"
-  },
-    {
-    title: "Book Analysis",
-    description: "An exploratory data analysis of Amazon Book Reviews, using NLP and collaborative filtering to find patterns.",
-    tags: ["Python", "Pandas", "NLP", "Jupyter"],
-    link: "https://github.com/Shahriyar31/Book-Analysis"
-  },
-  {
-    title: "Digital Twin GF3",
-    description: "A collaborative project focused on creating a Digital Twin for a grinding machine using data from an Edge device.",
-    tags: ["Digital Twin", "IoT", "Edge Computing"],
-    link: "https://github.com/rkraeuter/DigitalTwinGF3"
-  },
-  {
-    title: "Your Next Project",
-    description: "This is a placeholder for another one of your amazing data science or machine learning projects.",
-    tags: ["Coming Soon"],
-    link: "#"
-  },
+  { title: "Poultry Shield", description: "AI-powered veterinary diagnostics using Deep Learning to identify poultry diseases from images with 97.51% accuracy.", tags: ["Python", "TensorFlow", "Flask", "AWS EC2"], link: "https://github.com/Shahriyar31/Poultry_Shield-Deep-Learning-for-Poultry-Coccidiosis-Diagnosis" },
+  { title: "StockFlow", description: "Real-time stock market data engineering pipeline using Apache Kafka, S3, and AWS Glue for efficient data processing and analysis.", tags: ["Apache Kafka", "AWS S3", "AWS Glue", "Python"], link: "https://github.com/Shahriyar31/StockFlow-Real-Time-Stock-Market-Data-Engineering-with-Kafka" },
+  { title: "Radiation Tracking", description: "A real-time radiation monitoring and visualization system built with Kafka for data streaming and Docker for containerization.", tags: ["Kafka", "Docker", "GCP", "Node.js"], link: "https://github.com/Shahriyar31/Radiaton_Tracking" },
+  { title: "Book Analysis", description: "An exploratory data analysis of Amazon Book Reviews, using NLP and collaborative filtering to find patterns.", tags: ["Python", "Pandas", "NLP", "Jupyter"], link: "https://github.com/Shahriyar31/Book-Analysis" },
+  { title: "Digital Twin GF3", description: "A collaborative project focused on creating a Digital Twin for a grinding machine using data from an Edge device.", tags: ["Digital Twin", "IoT", "Edge Computing"], link: "https://github.com/rkraeuter/DigitalTwinGF3" },
+  { title: "Your Next Project", description: "This is a placeholder for another one of your amazing data science or machine learning projects.", tags: ["Coming Soon"], link: "#" }
 ];
 ---
 <section id="projects" class="section">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold uppercase text-center mb-4 text-slate-900 dark:text-white">
+    <div class="container mx-auto px-4 pr-20 lg:pr-4 py-16">
+        <h2 class="text-4xl font-bold uppercase text-center mb-4 text-slate-900 dark:text-white section-title">
             <span>My </span>
             <span class="text-blue-500">Projects</span>
         </h2>
-        <p class="text-center text-slate-600 dark:text-slate-300 opacity-80 mb-12 max-w-2xl mx-auto">A selection of my work, showcasing skills in software engineering and data science.</p>
+        <p class="text-center text-slate-600 dark:text-slate-300 opacity-80 mb-12 max-w-2xl mx-auto section-title">A selection of my work, showcasing skills in software engineering and data science.</p>
         
-        <div class="flex flex-wrap justify-center gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div class="project-card">
+            <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-card">
               <div class="card-content">
                 <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">{project.title}</h3>
                 <p class="text-slate-600 dark:text-slate-400 opacity-90 mb-4 flex-grow text-sm">{project.description}</p>
@@ -58,13 +28,11 @@ const projects = [
                   ))}
                 </div>
               </div>
-
-              <div class="card-overlay">
-                <a href={project.link} target="_blank" rel="noopener noreferrer" class="overlay-link">
-                    <i class="fab fa-github text-4xl"></i>
-                </a>
+              <div class="overlay-link-wrapper">
+                  <i class="fab fa-github text-xl mr-2"></i>
+                  View Project
               </div>
-            </div>
+            </a>
           ))}
         </div>
     </div>
@@ -72,67 +40,72 @@ const projects = [
 
 <style>
     .project-card {
-        /* 2 & 3. Set a fixed height and width to create a perfect square */
-        @apply h-80 w-80 
+        @apply h-auto md:h-96 /* Allow height to be auto on mobile, fixed on larger screens */
                relative flex flex-col rounded-2xl overflow-hidden
-               bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg 
-               border border-slate-200/50 dark:border-slate-800/50 
-               transition-all duration-500;
+               /* UPDATED: Brighter gradient for dark mode */
+               bg-gradient-to-br from-white/40 via-white/20 to-white/40
+               dark:from-slate-800/80 dark:via-slate-800/50 dark:to-slate-800/80
+               backdrop-blur-lg border border-white/30 dark:border-slate-700
+               transition-all duration-300 no-underline;
+    }
+    
+    .project-card::before {
+        content: '';
+        @apply absolute inset-0 z-0 transition-opacity duration-300 opacity-0;
+        background: radial-gradient(300px circle at var(--mouse-x, 0) var(--mouse-y, 0), theme('colors.sky.400 / 20%'), transparent 80%);
     }
 
-    .card-content {
-        @apply p-6 flex flex-col h-full transition-all duration-500 ease-in-out;
+    /* All other styles remain the same */
+    .project-card:hover::before,
+    .project-card.is-active::before { @apply opacity-100; }
+    .card-content { @apply p-6 flex flex-col h-full transition-transform duration-500 ease-out z-10; }
+    .project-card:hover .card-content,
+    .project-card.is-active .card-content { transform: translateY(-20%); }
+    .overlay-link-wrapper {
+        @apply absolute bottom-0 left-0 right-0 h-[20%] z-20
+               flex items-center justify-center gap-3 text-white font-bold
+               bg-slate-800/50 dark:bg-black/50 backdrop-blur-sm
+               transition-all duration-500 ease-out;
+        transform: translateY(100%);
     }
-
-    .project-card:hover .card-content {
-        transform: scale(0.95);
-        filter: blur(4px);
-        opacity: 0.5;
-    }
-
-    .card-overlay {
-        @apply absolute inset-0 flex items-center justify-center 
-               opacity-0 transition-all duration-300 ease-in-out;
-    }
-
-    .project-card:hover .card-overlay {
-        opacity: 1;
-    }
-
-    /* 1. STYLED THE GITHUB LINK AS A CIRCLE */
-    .overlay-link {
-        @apply flex items-center justify-center w-24 h-24 rounded-full text-white font-bold
-               bg-slate-800/70 dark:bg-black/70 backdrop-blur-sm
-               border border-white/20 hover:border-white/50
-               transition-all duration-300;
-        transform: translateY(20px);
-    }
-
-    .project-card:hover .overlay-link {
-        transform: translateY(0);
-        transition-delay: 0.1s;
-    }
+    .project-card:hover .overlay-link-wrapper,
+    .project-card.is-active .overlay-link-wrapper { transform: translateY(0); }
 </style>
 
 <script>
-    import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-    gsap.registerPlugin(ScrollTrigger);
-
+    // The script for the spotlight/tap-to-reveal remains the same
     document.addEventListener('DOMContentLoaded', () => {
-        const projectCards = gsap.utils.toArray('.project-card') as Array<Element>;
-        if (projectCards.length > 0) {
-            gsap.set(projectCards, { autoAlpha: 0, y: 50 });
-            ScrollTrigger.batch(projectCards, {
-                onEnter: batch => gsap.to(batch, {
-                    autoAlpha: 1,
-                    y: 0,
-                    stagger: 0.1,
-                    ease: "power3.out",
-                    duration: 0.8
-                }),
-                start: "top 85%",
-            });
-        }
+        const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const cards = document.querySelectorAll('.project-card');
+        
+        cards.forEach(card => {
+            if (!isTouchDevice()) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const mouseEvent = e as MouseEvent;
+                    const x = mouseEvent.clientX - rect.left;
+                    const y = mouseEvent.clientY - rect.top;
+                    (card as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+                    (card as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+                });
+            }
+
+            if (isTouchDevice()) {
+                card.addEventListener('click', (e) => {
+                    if (!card.classList.contains('is-active')) {
+                        e.preventDefault();
+                        cards.forEach(c => c.classList.remove('is-active'));
+                        card.classList.add('is-active');
+                    }
+                });
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const activeCard = document.querySelector('.project-card.is-active');
+            if (activeCard && !activeCard.contains(e.target as Node)) {
+                activeCard.classList.remove('is-active');
+            }
+        });
     });
 </script>

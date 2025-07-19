@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+/* --- THEME AND COLOR VARIABLES --- */
 :root {
-    --color-primary: #191d2b;
+    /* Primary color is now handled by the body's gradient */
     --color-secondary: #007bff;
     --color-white: #FFFFFF;
     --color-grey-2: #b2becd;
@@ -11,22 +12,55 @@
 }
 
 .light-mode {
-    --color-primary: #F5F5DC;
+    --color-secondary: #007bff; /* You can adjust the secondary color for light mode if needed */
     --color-white: #191d2b;
     --color-grey-5: #FFFFFF;
     --color-grey-2: #6c7983;
     --color-grey-4: #e1e1e1;
 }
 
+/* --- BASE STYLES --- */
 body {
     font-family: 'Poppins', sans-serif;
-    transition: background-color .4s ease-in-out, color .4s ease-in-out;
+    transition: background .4s ease-in-out, color .4s ease-in-out;
+    
+    /* Dark theme gradient by default */
+    background: linear-gradient(135deg, #191d2b, #2a2e35);
+    background-attachment: fixed; /* Ensures the gradient covers the whole page */
+    color: var(--color-white); /* Default text color for dark mode */
 }
 
+/* This rule applies the new gradient when light mode is active */
+.light-mode body {
+    background: linear-gradient(135deg, #E6E9F0, #F8F9FA);
+    color: #191d2b; /* Default text color for light mode */
+}
+
+/* --- LAYOUT STYLES (Unchanged) --- */
 .section {
     padding: 6rem 8rem;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #191d2b; /* Dark track for dark mode */
+}
+.light-mode ::-webkit-scrollbar-track {
+    background: #E6E9F0; /* Light track for light mode */
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+}
+
+/* --- RESPONSIVE PADDING (Unchanged) --- */
 @media screen and (max-width: 1400px) { .section { padding: 5rem 6rem; } }
 @media screen and (max-width: 992px) { .section { padding: 4rem 4rem; } }
 @media screen and (max-width: 600px) { .section { padding: 4rem 2rem; } }
