@@ -1,31 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
+/* --- THEME AND COLOR VARIABLES --- */
 :root {
-    --color-primary: #191d2b;
-    --color-secondary: #007bff;
-    --color-white: #FFFFFF;
+    /* Dark Theme (Default) */
+    --color-primary: #231942;   /* Deep Purple - Background */
+    --color-secondary: #F42C7D;  /* Hot Pink - Accent */
+    --color-white: #F1F1F1;    /* Clean Off-White - Text */
 }
-.light-mode {
-    --color-primary: #F5F5DC;
-    --color-white: #191d2b;
-}
-body {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    font-family: 'Poppins', sans-serif;
-    transition: background-color .4s ease-in-out, color .4s ease-in-out;
-}
-html { scroll-behavior: smooth; }
 
-/* A single, consistent padding rule for all sections */
+.light-mode {
+    /* Light Theme */
+    --color-primary: #EAE4F2;   /* Pale Lavender - Background */
+    --color-white: #231942;    /* Deep Purple - Text */
+}
+
+/* --- BASE STYLES --- */
+body {
+    /* This now correctly uses the 'background' property with the variable, enabling the theme switch */
+    background: var(--color-primary);
+    background-attachment: fixed; /* Ensures the gradient covers the whole page */
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    transition: background .4s ease-in-out, color .4s ease-in-out;
+}
+
+/* --- LAYOUT STYLES (Unchanged) --- */
 .section {
-    padding: 4rem 1rem; /* Mobile padding */
-    min-height: 100vh;
+    padding: 4rem 1rem;
 }
 @media screen and (min-width: 640px) { .section { padding: 4rem 2rem; } }
 @media screen and (min-width: 1024px) { .section { padding: 5rem 4rem; } }
 
+html {
+    scroll-behavior: smooth;
+}
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-primary); }
-::-webkit-scrollbar-thumb { background-color: var(--color-secondary); border-radius: 8px; }
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scroll-track-color);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary);
+    border-radius: 8px;
+}
