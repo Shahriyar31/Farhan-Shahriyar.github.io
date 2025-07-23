@@ -4,54 +4,28 @@
     --color-primary: #191d2b;
     --color-secondary: #007bff;
     --color-white: #FFFFFF;
-    --color-grey-2: #b2becd;
-    --color-grey-4: #454e56;
-    --color-grey-5: #2a2e35;
-    --box-shadow-1: 0 3px 15px rgba(0,0,0,.3);
-
-    /* NEW: Glass colors for dark mode */
-    --glass-bg: rgba(42, 46, 53, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.1);
 }
-
 .light-mode {
-    --color-primary: #F5F5DC; 
+    --color-primary: #F5F5DC;
     --color-white: #191d2b;
-    --color-grey-5: #FFFFFF;
-    --color-grey-2: #6c7983;
-    --color-grey-4: #e1e1e1;
-
-    /* NEW: Glass colors for light mode */
-    --glass-bg: rgba(255, 255, 255, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.6);
 }
-
-/* --- BASE STYLES --- */
 body {
-    background: var(--color-primary);
-    background-attachment: fixed;
-    color: var(--text-color);
+    background-color: var(--color-primary);
+    color: var(--color-white);
     font-family: 'Poppins', sans-serif;
-    transition: background .4s ease-in-out, color .4s ease-in-out;
+    transition: background-color .4s ease-in-out, color .4s ease-in-out;
 }
+html { scroll-behavior: smooth; }
 
+/* A single, consistent padding rule for all sections */
 .section {
-    padding: 6rem 8rem;
+    padding: 4rem 1rem; /* Mobile padding */
+    min-height: 100vh;
 }
-html {
-    scroll-behavior: smooth;
-}
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: var(--scroll-track-color);
-}
-::-webkit-scrollbar-thumb {
-    background-color: var(--color-secondary);
-    border-radius: 8px;
-}
+@media screen and (min-width: 640px) { .section { padding: 4rem 2rem; } }
+@media screen and (min-width: 1024px) { .section { padding: 5rem 4rem; } }
 
-@media screen and (max-width: 1400px) { .section { padding: 5rem 6rem; } }
-@media screen and (max-width: 992px) { .section { padding: 4rem 4rem; } }
-@media screen and (max-width: 600px) { .section { padding: 4rem 2rem; } }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-primary); }
+::-webkit-scrollbar-thumb { background-color: var(--color-secondary); border-radius: 8px; }
